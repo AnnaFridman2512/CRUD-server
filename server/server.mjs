@@ -112,9 +112,21 @@ app.delete("/users/:acountNumber", (req, res) => {//If we want to delete a user 
 
 let categories = loadJson.sync('./data/categories.json');
 
-app.get('/products/categories', async (req, res) => {
+app.get('/categories', (req, res) => {
     res.send(categories);////using loadJson to get the data from categories.json file 
 });
+
+app.post('/categories/:category', (req, res) =>{
+   categories.push(req.params.category);
+   res.send("Category added");
+});
+
+app.delete('/categories/:category', (req, res) =>{
+    categories= categories.filter(category => category != req.params.category);
+    res.send("category deleted");
+});
+
+
 app.listen(8080);
 
 console.log('it works');
