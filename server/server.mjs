@@ -10,11 +10,17 @@ import {usersRouter} from './src/users.mjs';
 import {categoriesRouter} from './src/categories.mjs';
 
 const app = express();
+//app.use((req, res, next) =>{
+//   const time = Date.now();
+//    next();
+//   const time2 = Date.now();
+//   console.log(`Request took ${time2-time} ms'` );
+//});
 app.use(cors()); //Localhost 3000 can get info from 8080 even thow they are both local
 app.use(express.json());//Used to parse JSON bodies
-app.use(productsRouter);
-app.use(usersRouter);
-app.use(categoriesRouter);
+app.use('/products', productsRouter); //productsRouter is executed only when the rout is '/products'
+app.use('/users', usersRouter);//usersRouter is executed only when the rout is '/users'
+app.use('/categories', categoriesRouter);//categoriesRouter is executed only when the rout is '/categories'
 
 
 //CRUD - create read apdate delete
