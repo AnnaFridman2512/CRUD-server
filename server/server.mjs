@@ -1,5 +1,5 @@
 import express from 'express';
-import cors from 'cors';
+
 //import loadJson from 'load-json-file';//Loads a JSON file from a file or a URL, 
                                       //and returns an Object. Note that even if the JSON file contains an Array, 
                                       //an Object will be returned with index numbers as keys.
@@ -16,7 +16,7 @@ const app = express();
 //   const time2 = Date.now();
 //   console.log(`Request took ${time2-time} ms'` );
 //});
-app.use(cors()); //Localhost 3000 can get info from 8080 even thow they are both local
+
 app.use(express.json());//Used to parse JSON bodies
 app.use('/products', productsRouter); //productsRouter is executed only when the rout is '/products'
 app.use('/users', usersRouter);//usersRouter is executed only when the rout is '/users'
