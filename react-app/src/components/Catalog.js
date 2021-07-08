@@ -1,5 +1,5 @@
 import Product from "./Product";
-import { useState, useEffect } from "react";
+
 
 export default function Catalog({products, onAddToCart }){//Destructuring - getting the products array from the object 
     return (

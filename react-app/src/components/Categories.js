@@ -7,7 +7,7 @@ export default function Categories(){
                                                    //After fetching, the product object are going to come with a 'category' key.
 
     useEffect(()=> {//Now we are fetching the categories
-        fetch('http://localhost:8080/products/categories')
+        fetch('/categories')//"proxy": "http://localhost:8080" added in package.json file
           .then(response => response.json())//Here we got the categories array 
           .then(categoriesArr => setCategories(categoriesArr));//Takes the categories array that we got above and replaces the empty 'categories' array with the one we got from fetch()
         }, []);

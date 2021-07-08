@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import loadJson from 'load-json-file';//Loads a JSON file from a file or a URL, 
+//import loadJson from 'load-json-file';//Loads a JSON file from a file or a URL, 
                                       //and returns an Object. Note that even if the JSON file contains an Array, 
                                       //an Object will be returned with index numbers as keys.
                                       //This method is asynchronous, meaning it may not finish before the next line in your sketch is executed.
@@ -32,4 +32,4 @@ app.use('/categories', categoriesRouter);//categoriesRouter is executed only whe
 
 app.listen(8080);
 
-console.log('it works');
+console.log('Server up and running on localhost:8080');
