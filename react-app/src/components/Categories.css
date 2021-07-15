@@ -1,0 +1,21 @@
+.categories {
+    align-self: right;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 200px;
+    border-radius: 5px;
+
+}
+
+.categories-list {
+    padding: unset;
+}
+
+.category-item {
+    list-style-type: none;
+}
+
+.custom-category{
+    font-weight: bold;
+}
