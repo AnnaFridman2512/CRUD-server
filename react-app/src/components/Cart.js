@@ -1,31 +1,17 @@
 
-import './Cart.css';
-import { CatalogContext } from './CatalogContext';
-import { CartContext } from './App/CartContext';
-import { useContext } from 'react';
+
+export default function Cart({items, products}){//"items" is a prop from App.js
+    //it's an object with keys that are the id and quantity as the idies values
+    //"products" is a prop from App.js
 
 
-function CartItem({name, quantity}) {
-    return (
-        <div className="cart-item">
-            <span className="cart-item-name">{name}</span>
-            <span className="cart-item-quantity">{quantity}</span>
-        </div>
-    );
+return (
+<>
+
+Cart: {Object.entries(items).map(([id, quantity])=> //*Object.entries takes an object and returns am array with  key:value pairs arrays [[key:value], [key:value]] 
+`Product id ${id}: quantity ${quantity} |`
+)} 
+
+</>
+);
 }
-
-export default function Cart() {
-    const {products} = useContext(CatalogContext);//we have the products in CatalogContext from fetching
-    const {cartItems} = useContext(CartContext);
-    return (
-        <div className="cart">
-            <h3>Cart</h3>
-            {Object.entries(cartItems)
-                .map(([id, quantity]) => 
-                    <CartItem 
-                        name={products[id].title} 
-                        quantity={quantity} 
-                    />)}
-        </div>
-    );
-} 

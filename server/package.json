@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "cors": "^2.8.5",
     "express": "^4.17.1",
     "load-json-file": "^6.2.0",
-    "nodemon": "^2.0.9"
+    "nodemon": "^2.0.12"
   },
   "devDependencies": {},
   "scripts": {

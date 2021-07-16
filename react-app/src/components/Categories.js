@@ -1,5 +1,3 @@
-import './Categories.css';
-import Category from './Category';
 import { useState, useEffect } from "react";
 
 
@@ -15,17 +13,10 @@ export default function Categories(){
         }, []);
     
     return (
-            <div className="categories">
-                <h3>Categories</h3>
-                <ul className="categories-list">
-                    {categories.map(category => 
-                    <Category>
-                       <span className="custon-category"> {category}</span> {/*After fetching the 'categories' array we map it and put it in the DOM, category is the child of Category */}
-                    </Category>                                             //So if i want to style it i can wrap it with span and style ir in css
-                                                                             //And then we can add diffrent content to the Category square, the square will look the same but the content will change
-                    )} 
-                </ul>                                                                                                             
-            </div> 
+
+        <div>
+            {categories.map(category => <span> <a href="#">{category}</a> </span>)} {/*After fetching the 'categories' array we map it and put it in the DOM*/}
+        </div> 
 
     );
 }

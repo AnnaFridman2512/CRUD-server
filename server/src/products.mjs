@@ -52,4 +52,3 @@ productsRouter.delete("/:id", (req, res) => {//If we want to delete a product we
     products = products.filter(product => product.id != req.params.id);//"products" is an array so we filter it by id. 
     res.send("deleted");
 });
-

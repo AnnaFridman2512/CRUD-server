@@ -21,7 +21,7 @@ app.use(express.json());//Used to parse JSON bodies
 app.use('/products', productsRouter); //productsRouter is executed only when the rout is '/products'
 app.use('/users', usersRouter);//usersRouter is executed only when the rout is '/users'
 app.use('/categories', categoriesRouter);//categoriesRouter is executed only when the rout is '/categories'
-app.use(express.static('../react-app/build'));//bring all html css and staticfiles from "build"
+app.use(express.static('../react-app/build'));
 
 //CRUD - create read apdate delete
 //Protocol CRUD Servers: REST (Representational state transfer)
