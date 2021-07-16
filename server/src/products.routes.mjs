@@ -2,7 +2,7 @@ import express from 'express';
 import loadJson from 'load-json-file';
 
 export const productsRouter = express.Router();
-let products = loadJson.sync('./data/products.json'); //Saving the data  from the wanted file to a variable 
+export let products = loadJson.sync('./data/products.json'); //Saving the data  from the wanted file to a variable 
 
 
 productsRouter.get("/" , (req, res) => {//Get all products

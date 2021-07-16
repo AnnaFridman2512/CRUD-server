@@ -5,9 +5,9 @@ import express from 'express';
                                       //an Object will be returned with index numbers as keys.
                                       //This method is asynchronous, meaning it may not finish before the next line in your sketch is executed.
                               
-import {productsRouter} from './src/products.mjs';
-import {usersRouter} from './src/users.mjs';
-import {categoriesRouter} from './src/categories.mjs';
+import {productsRouter} from './src/products.routes.mjs';
+import {usersRouter} from './src/users.routes.mjs';
+import {categoriesRouter} from './src/categories.routes.mjs';
 
 const app = express();
 //app.use((req, res, next) =>{
