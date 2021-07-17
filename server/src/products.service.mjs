@@ -26,3 +26,6 @@ export function editProduct(id, newProduct){
     product.image = newProduct.image
 }
 
+export function getProductsByUserId(userId){
+    return products.filter(product => product.userId == userId);
+}

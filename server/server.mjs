@@ -8,6 +8,7 @@ import express from 'express';
 import {productsRouter} from './src/products.routes.mjs';
 import {usersRouter} from './src/users.routes.mjs';
 import {categoriesRouter} from './src/categories.routes.mjs';
+import {postsRouter} from './src/posts.routes.mjs';
 
 const app = express();
 //app.use((req, res, next) =>{
@@ -21,6 +22,7 @@ app.use(express.json());//Used to parse JSON bodies
 app.use('/products', productsRouter); //productsRouter is executed only when the rout is '/products'
 app.use('/users', usersRouter);//usersRouter is executed only when the rout is '/users'
 app.use('/categories', categoriesRouter);//categoriesRouter is executed only when the rout is '/categories'
+app.use('/posts', postsRouter);
 app.use(express.static('../react-app/build'));
 
 //CRUD - create read apdate delete
