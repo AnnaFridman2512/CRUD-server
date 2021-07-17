@@ -1,5 +1,5 @@
 import express from 'express';
-import {products} from './products.routes.mjs';
+
 import { deleteUser } from './users.service.mjs';
 import { editUser } from './users.service.mjs';
 import { addUser } from './users.service.mjs';
