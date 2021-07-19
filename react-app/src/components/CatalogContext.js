@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 
 export const CatalogContext = React.createContext({
     products: [],//Before fetching the array is empty 
+    setProducts: () => []
 });
 
 
