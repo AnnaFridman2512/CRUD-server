@@ -13,10 +13,10 @@ export const usersRouter = express.Router();
 
 
 
-usersRouter.get("/", (req, res) => {//Get all users
+usersRouter.get("/", async (req, res) => {//Get all users
                               //No need to " "/users",  (req, res)", only "/" (req, res). because "/users" is defined in server.mjs app.use('/users', usersRouter);
 
-    res.send(getUsers());//getUsers() function is imported from './users.service.mjs
+    res.send(await getUsers());//getUsers() function is imported from './users.service.mjs
 });
 
 //Create user 
@@ -27,9 +27,9 @@ usersRouter.post("/", (req, res) => {//If we want to create a new user we use po
 });
 
 //Get single user from the users array 
-usersRouter.get("/:userId", (req, res) => {//If we want to see a single user by its acountNumber, we use :acountNumber , we save whatever is writen after users/ and saves it in acount-number variable (can call "acount-number" whatever instead)
+usersRouter.get("/:userId", async (req, res) => {//If we want to see a single user by its acountNumber, we use :acountNumber , we save whatever is writen after users/ and saves it in acount-number variable (can call "acount-number" whatever instead)
                                                  //don't need to write "/users/:acountNumber", only "/:id", because /products is defined in users.mjs app.use('/users', usersRouter);
-    res.send(getUser(req.params.userId));//getUser() function is imported from './users.service.mjs
+    res.send(await getUser(req.params.userId));//getUser() function is imported from './users.service.mjs
 });
 
 //get all products with a spesific userId

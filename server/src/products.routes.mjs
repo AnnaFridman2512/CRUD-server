@@ -10,8 +10,8 @@ export const productsRouter = express.Router();
 
 
 //Get all products
-productsRouter.get("/" , (req, res) => {//No need to ""/products",  (req, res)", only "/", (req, res). because "/products" is defined in server.mjs app.use('/products', productsRouter);
-    res.send(getProducts());// getProducts is a function from products.service.mjs
+productsRouter.get("/" , async (req, res) => {//No need to ""/products",  (req, res)", only "/", (req, res). because "/products" is defined in server.mjs app.use('/products', productsRouter);
+    res.send(await getProducts());// getProducts is a function from products.service.mjs
 });
 
 //Create product 
@@ -30,9 +30,9 @@ productsRouter.post("/",(req, res) => {//If we want to create a new product we u
 });
 
 //Get single product from the products array 
-productsRouter.get("/:id", (req, res) => {//If we want to see a single product by its id, we use :id , we save whatever is writen after products/ and saves it in id variable (can call "id" whatever instead)
+productsRouter.get("/:id", async (req, res) => {//If we want to see a single product by its id, we use :id , we save whatever is writen after products/ and saves it in id variable (can call "id" whatever instead)
                                           //don't need to write "/products/:id", only "/:id", because /products is defined in server.mjs app.use('/products', productsRouter);
-    res.send(getProduct(req.params.id));
+    res.send(await getProduct(req.params.id));
 });
 
 //Update single product 
