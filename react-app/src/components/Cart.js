@@ -21,9 +21,9 @@ export default function Cart() {
         <div className="cart">
             <h3>Cart</h3>
             {Object.entries(cartItems)
-                .map(([id, quantity]) => 
+                .map(([_id, quantity]) => 
                     <CartItem 
-                        name={products[id].title} 
+                        name={products[_id].title} 
                         quantity={quantity} 
                     />)}
         </div>

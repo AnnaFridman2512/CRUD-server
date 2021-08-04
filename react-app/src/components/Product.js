@@ -6,7 +6,7 @@ import { CartContext } from './CartContext';
 function Product({ //After we fetched the products, we destructure, to get the keys separetly and use them later on 
   category,        //Look at the example of one of the objects that we got below
   description,
-  id,
+  _id,
   image,
   title,
   price,
@@ -20,7 +20,7 @@ function Product({ //After we fetched the products, we destructure, to get the k
       <span>{category}</span>
       <h3>{title}</h3>
       <p>{description}</p>
-      <button onClick={() => addToCart(id)}>Add to cart ${price}</button>{/*When the button is clicked*/}
+      <button onClick={() => addToCart(_id)}>Add to cart ${price}</button>{/*When the button is clicked*/}
      </div>                                                                 //call the onAddToCartf function
   );                                                                        //and pass it the id of the product
 }                                                                           //so it will add the id to the cart
