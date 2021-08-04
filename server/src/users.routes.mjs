@@ -12,8 +12,8 @@ export const usersRouter = express.Router();
 
 
 
-
-usersRouter.get("/", async (req, res) => {//Get all users
+//Get all users
+usersRouter.get("/", async (req, res) => {
                               //No need to " "/users",  (req, res)", only "/" (req, res). because "/users" is defined in server.mjs app.use('/users', usersRouter);
 
     res.send(await getUsers());//getUsers() function is imported from './users.service.mjs
@@ -33,21 +33,21 @@ usersRouter.get("/:userId", async (req, res) => {//If we want to see a single us
 });
 
 //get all products with a spesific userId
-usersRouter.get("/:userId/products", (req, res) => {
-    res.send(getProductsByUserId(req.params.userId));
+usersRouter.get("/:userId/products",async (req, res) => {
+    res.send(await getProductsByUserId(req.params.userId));
 });
 
 //get all posts with a spesific userId
-usersRouter.get("/:userId/posts", (req, res) => {
-    res.send(getPostByUserId(req.params.userId));
+usersRouter.get("/:userId/posts",async (req, res) => {
+    res.send(await getPostByUserId(req.params.userId));
 });
 
 //Update single user 
-usersRouter.put("/:userId", (req, res) => {//If we want to update a product we use put instead of get. we use :id to save whatever is writen after products/ and saves it in id variable (can call "id" whatever instead)
-    res.send(editUser(req.params.userId, req.body));//editUser() function is imported from './users.service.mjs
+usersRouter.put("/:userId",async (req, res) => {//If we want to update a product we use put instead of get. we use :id to save whatever is writen after products/ and saves it in id variable (can call "id" whatever instead)
+    res.send(await editUser(req.params.userId, req.body));//editUser() function is imported from './users.service.mjs
 });
 
 //Delete single user
-usersRouter.delete("/:userId", (req, res) => {//If we want to delete a user we use delete instead of get
-    res.send(deleteUser(req.params.userId));
+usersRouter.delete("/:userId",async (req, res) => {//If we want to delete a user we use delete instead of get
+    res.send(await deleteUser(req.params.userId));
 });

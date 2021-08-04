@@ -15,3 +15,8 @@ export function getProductsCollection(){
 export function getUsersCollection(){
     return db.collection('Users');
 }
+
+
+export function getPostsCollection(){
+    return db.collection('Posts');
+}

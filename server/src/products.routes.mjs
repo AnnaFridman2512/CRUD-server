@@ -36,11 +36,11 @@ productsRouter.get("/:id", async (req, res) => {//If we want to see a single pro
 });
 
 //Update single product 
-productsRouter.put("/:id", (req, res) => {//If we want to update a product we use put instead of get. we use :id to save whatever is writen after products/ and saves it in id variable (can call "id" whatever instead)
-    res.send(editProduct(req.params.id, req.body));
+productsRouter.put("/:id",async (req, res) => {//If we want to update a product we use put instead of get. we use :id to save whatever is writen after products/ and saves it in id variable (can call "id" whatever instead)
+    res.send(await editProduct(req.params.id, req.body));
 });
 
 //Delete single product
-productsRouter.delete("/:id", (req, res) => {//If we want to delete a product we use delete instead of get
-    res.send(deleteProduct(req.params.id));
+productsRouter.delete("/:id", async (req, res) => {//If we want to delete a product we use delete instead of get
+    res.send(await deleteProduct(req.params.id));
 });

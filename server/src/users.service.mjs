@@ -3,28 +3,32 @@ import {getUsersCollection} from './db/connect.mjs';
 
 let users = loadJson.sync('./data/users.json'); //Saving the data  from the wanted file to a variable 
 
-export async function getUsers() {
+export  function getUsers() {
     return getUsersCollection().find({}).toArray();
 }
 
-export async function getUser(userId){
+export  function getUser(userId){
     return  getUsersCollection()
     .find({userId: parseInt(userId)})
     .toArray();
 }
 
-export function addUser(user){
-    users.push(user);
+export async function addUser(user){
+    return getUsersCollection()
+    .insertOne(user)//insertOne- is a mongoDB method
+    .toArray();
 }
 
 export function deleteUser(userId){
-    users = users.filter(user => user.userId != userId);//"users" is an array so we filter it by acountNumber. 
+    return getUsersCollection()
+    .deleteOne({userId: parseInt(userId)})//deleteOne- is a mongoDB method,delete the object that has the same userId as we passed in the argument
 }
 
 export function editUser(userId, newUser){
-    let [user]= users.filter(user => user.userId == userId);//"users" is an array so we filter it by acount-number. the distructuring is to get a single object and not an array with a single object
-    user.name = newUser.name, //So through the query string  we can reach it's values and change them
-    user.age = newUser.age,
-    user.userId = newUser.userId;
+    return getUsersCollection()
+    .updateOne(//updateOne - is a mongoDB method
+        {userId: parseInt(userId)},//first argument tells which product to update (by its userId)
+        {$set: newUser}//$set - is mongoDB operator. Will add a new field with the specified value we passed in "newUser"
+    )                   //$set - tells mongo to add the key-value pair if it doesn't  exist, or to change it if it does.
 }
 
