@@ -18,9 +18,9 @@ postsRouter.get("/", async (req, res) => {//Get all posts
 });
 
 //Create post 
-postsRouter.post("/", (req, res) => {//If we want to create a new post we use post instead of get
+postsRouter.post("/", async (req, res) => {//If we want to create a new post we use post instead of get
                                //No need to " "/posts",  (req, res)", only (req, res). because "/posts" is defined in server.mjs app.use('/users', postsRouter);
-    res.send(addPost(req.body));//addPost() function is imported from './posts.service.mjs
+    res.send(await addPost(req.body));//addPost() function is imported from './posts.service.mjs
 });
 
 //Get single post from the posts array 

@@ -20,10 +20,10 @@ usersRouter.get("/", async (req, res) => {
 });
 
 //Create user 
-usersRouter.post("/", (req, res) => {//If we want to create a new user we use post instead of get
+usersRouter.post("/", async (req, res) => {//If we want to create a new user we use post instead of get
                                //No need to " "/users",  (req, res)", only (req, res). because "/users" is defined in server.mjs app.use('/users', usersRouter);
                  
-    res.send(addUser(req.body));//addUser() function is imported from './users.service.mjs
+    res.send(await addUser(req.body));//addUser() function is imported from './users.service.mjs
 });
 
 //Get single user from the users array 

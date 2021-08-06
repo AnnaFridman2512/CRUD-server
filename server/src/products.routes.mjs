@@ -16,10 +16,10 @@ productsRouter.get("/" , async (req, res) => {//No need to ""/products",  (req, 
 });
 
 //Create product 
-productsRouter.post("/",(req, res) => {//If we want to create a new product we use post instead of get
+productsRouter.post("/", async (req, res) => {//If we want to create a new product we use post instead of get
                                   //No need to ""/products",  (req, res)", only "/", (req, res). because "/products" is defined in server.mjs app.use('/products', productsRouter);
 
-    res.send(addProduct(req.body));//"addProduct" is a Function from products.service.mjs  
+    res.send(await addProduct(req.body));//"addProduct" is a Function from products.service.mjs  
                             //express doesn't know how to deal with adding objects so we use "body" that came with express
                             //it parses the object
                              //{id: req.query.id, //So through the query string  we can reach it's values and change them

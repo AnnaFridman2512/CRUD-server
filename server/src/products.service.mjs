@@ -56,5 +56,7 @@ export function editProduct(id, newProduct){
 }
 
 export function getProductsByUserId(userId){
-    return products.filter(product => product.userId == userId);
+    return getProductsCollection()
+    .find({userId: userId})//find() is a mongodb method. find mr all products that have the same userIdd as i passed
+    .toArray();//returns a collection, so we nrrd to convert it to array
 }
