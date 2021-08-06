@@ -1,6 +1,7 @@
 import loadJson from 'load-json-file';
 import {getProductsCollection}  from './db/connect.mjs';
 import Mongo from 'mongodb';
+import { getUser } from './users.service.mjs';
 const {ObjectId}= Mongo;//extracting objectId function from momgodb, the function strigifys whatever is in objectId value
 
 export let products = loadJson.sync('./data/products.json'); //Saving the data  from the wanted file to a variable 
@@ -30,11 +31,17 @@ export function getProducts(filter = {}) {//As default we send an empty object t
     .toArray();
 }
 
-export  function getProduct(id){
-  return  getProductsCollection()
+export async function getProduct(id){
+    const product = await getProductsCollection()//saving the produuct we got to a variable
+
     .findOne({_id: ObjectId(id)});//findOne- is a mongoDB method. finds the product that its _id  is the same as the id we pased in the function
                                   //the _id is what mongo gives each object, it includes letters and numbers so we can't parseit
-}                                 //we use the ObjectId function to turn it to a mongo ObjectId object
+                                 //we use the ObjectId function to turn it to a mongo ObjectId object
+    const owner = await getUser(product.userId);//Passing the "getUser" function the "userId" we got from the "product", the function will return the user with that userId. Saving the user object on "owner" variable
+    product.owner = owner;  //adding to "product" object that we got before a new key "owner" and setting its value to the "owner" object we got above
+    
+    return product;
+} 
 
 export async function addProduct(product){
     return getProductsCollection()
@@ -58,5 +65,5 @@ export function editProduct(id, newProduct){
 export function getProductsByUserId(userId){
     return getProductsCollection()
     .find({userId: userId})//find() is a mongodb method. find mr all products that have the same userIdd as i passed
-    .toArray();//returns a collection, so we nrrd to convert it to array
+    .toArray();//returns a collection, so we nrrd to convert it to
 }
