@@ -13,7 +13,7 @@ const [products, setProducts] = useState([]);//At the begining we have an empty 
 
 
 useEffect(()=> {//What is written inside this function is going to be executed when the component is rendered
-    fetch('/products')
+    fetch('/api/products')
     .then(response => response.json())//After fetching take the response (that came as a stirng) json() will convert the string in-to an array of objects.
     .then(productsArr => setProducts(productsArr));//Takes the products array of objects, that we got above and replaces the empty 'products' array with the one we got from fetch()
   }, []);//If we don't put the epty array- the function is going to be executed every time we re-render the aplication

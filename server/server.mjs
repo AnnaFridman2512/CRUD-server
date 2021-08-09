@@ -21,10 +21,10 @@ const app = express();
 //});
 
 app.use(express.json());//Used to parse JSON bodies
-app.use('/products', productsRouter); //productsRouter is executed only when the rout is '/products'
-app.use('/users', usersRouter);//usersRouter is executed only when the rout is '/users'
-app.use('/categories', categoriesRouter);//categoriesRouter is executed only when the rout is '/categories'
-app.use('/posts', postsRouter);
+app.use('/api/products', productsRouter); //productsRouter is executed only when the rout is '/products'
+app.use('/api/users', usersRouter);//usersRouter is executed only when the rout is '/users'
+app.use('/api/categories', categoriesRouter);//categoriesRouter is executed only when the rout is '/categories'
+app.use('/api/posts', postsRouter);
 app.use(express.static('../react-app/build'));
 
 //CRUD - create read apdate delete
