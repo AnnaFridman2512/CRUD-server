@@ -26,11 +26,11 @@ function App() {
         <Switch>
           <Route path="/products" exact>
             <Categories />
-            <Catalog  /> {/*Using "products" array as a prop so we can access it in Catalog component */}
-                                                      {/*"onAddToCart" is a prop that stores "addToCart" function so we can use it in catalog*/}
+            <Catalog  />                                    
           </Route>
-            <Cart /> {/*Using "products" (all the products) array as a prop so we can access it in Cart component */}
-                                                     {/*Using "items" (only cart products) as a prop so we can access it in Cart component  */}
+          <Route path="/cart" exact>
+            <Cart /> 
+          </Route>                                          
         </Switch>
       </CartProvider>  
       </CatalogProvider> 
