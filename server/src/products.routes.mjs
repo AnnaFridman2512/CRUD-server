@@ -11,8 +11,13 @@ export const productsRouter = express.Router();
 
 //Get all products
 productsRouter.get("/" , async (req, res) => {//No need to ""/products",  (req, res)", only "/", (req, res). because "/products" is defined in server.mjs app.use('/products', productsRouter);
-    res.send(await getProducts(req.query));// getProducts is a function from products.service.mjs
-                                           //req.query- because the function also filters by "title" "maxPrice" "minPrice"
+    try{
+        res.send(await getProducts(req.query));// getProducts is a function from products.service.mjs
+                                                //req.query- because the function also filters by "title" "maxPrice" "minPrice"
+    }catch(e){
+        res.status(400);
+        res.send(e.message);
+    }
 });
 
 //Create product 

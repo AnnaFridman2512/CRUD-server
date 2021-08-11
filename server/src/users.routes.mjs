@@ -15,15 +15,19 @@ export const usersRouter = express.Router();
 //Get all users
 usersRouter.get("/", async (req, res) => {
                               //No need to " "/users",  (req, res)", only "/" (req, res). because "/users" is defined in server.mjs app.use('/users', usersRouter);
-
     res.send(await getUsers());//getUsers() function is imported from './users.service.mjs
+
 });
 
 //Create user 
 usersRouter.post("/", async (req, res) => {//If we want to create a new user we use post instead of get
                                //No need to " "/users",  (req, res)", only (req, res). because "/users" is defined in server.mjs app.use('/users', usersRouter);
-                 
+    try{
     res.send(await addUser(req.body));//addUser() function is imported from './users.service.mjs
+}catch(e){
+    res.status(400);
+    res.send(e.message);
+}
 });
 
 //Get single user from the users array 

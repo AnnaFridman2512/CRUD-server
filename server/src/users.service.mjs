@@ -5,7 +5,7 @@ import { getProduct } from './products.service.mjs';
 const {ObjectId}= Mongo;//extracting objectId function from momgodb, the function strigifys whatever is in objectId value
 //let users = loadJson.sync('./data/users.json'); //Saving the data  from the wanted file to a variable 
 
-
+const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export  function getUsers() {
     return getUsersCollection().find({}).toArray();
 }
@@ -17,7 +17,16 @@ export  function getUser(userId){
 }                                 //we use the ObjectId function to turn it to a mongo ObjectId object
 
 export async function addUser(user){
+
+    if(!user.name) throw new Error("Missing user name");//What happns if there is no username 
+    if(!user.id) throw new Error("Missing user id");//What happns if there is no id 
+    if(!user.age) throw new Error("Missing user age");//What happns if there is no age 
+    if(!user.email) throw new Error("Missing user email");//What happns if there is no age 
+    if(!emailRegEx.test(user.email)) throw new Error("Not valid email")//test()- is RegExs method that checks if emailRegEx is true
+
+    
     const {insertedId} = await getUsersCollection()//insertedId- we get it as a response from mongoDB, it'd the _id string of the new object created
+
     .insertOne(user);//insertOne- is a mongoDB method
     return getUser(insertedId);
 }
