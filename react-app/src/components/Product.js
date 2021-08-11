@@ -9,6 +9,7 @@ function Product({ //After we fetched the products, we destructure, to get the k
   category,        //Look at the example of one of the objects that we got below
   description,
   _id,
+  id,
   image,
   title,
   price,
@@ -24,7 +25,7 @@ function Product({ //After we fetched the products, we destructure, to get the k
       <h3>{title}</h3>
       </Link>
       <p>{description}</p>
-      <button onClick={() => addToCart(_id)}>Add to cart ${price}</button>{/*When the button is clicked*/}
+      <button onClick={() => addToCart(id)}>Add to cart ${price}</button>{/*When the button is clicked*/}
      </div>                                                                 //call the onAddToCartf function
   );                                                                        //and pass it the id of the product
 }                                                                           //so it will add the id to the cart

@@ -23,7 +23,7 @@ return (
       <span>{product.category}</span>
       <h3>{product.title}</h3>
       <p>{product.description}</p>
-      <button onClick={() => addToCart(id)}>Add to cart ${product.price}</button>
+      <button onClick={() => addToCart(product.id)}>Add to cart ${product.price}</button>
     </div>
  )
 }
