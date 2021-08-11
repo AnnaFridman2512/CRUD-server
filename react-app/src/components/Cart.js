@@ -20,13 +20,13 @@ function CartItem({name, quantity, _id}) {
 export default function Cart() {
     const {products} = useContext(CatalogContext);
     const {cartItems: items} = useContext(CartContext);
-    console.log(items);
+
     return (
         <div className="cart">
             <h3>Cart</h3>
             {Object.entries(items)
                 .map(([id, quantity]) =>
-                    <CartItem
+                    <CartItem key={id}
                         name={products[id].title}
                         quantity={quantity}
                         id={id}
