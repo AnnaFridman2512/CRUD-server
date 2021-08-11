@@ -14,6 +14,7 @@ import Categories from '../Categories';
 import CatalogProvider from '../CatalogContext';
 import CartProvider from '../CartContext';
 import Header from "../Header";
+import GetProduct from '../GetProduct';
 
 function App() {
   return(
@@ -30,7 +31,10 @@ function App() {
           </Route>
           <Route path="/cart" exact>
             <Cart /> 
-          </Route>                                          
+          </Route>  
+          <Route path="/products/:id">
+            <GetProduct />
+          </Route>                                        
         </Switch>
       </CartProvider>  
       </CatalogProvider> 

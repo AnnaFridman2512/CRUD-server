@@ -1,12 +1,14 @@
 import './Product.css';
 import React, { useContext } from 'react';
 import { CartContext } from './CartContext';
-
+import {
+  Link,
+} from "react-router-dom";
 
 function Product({ //After we fetched the products, we destructure, to get the keys separetly and use them later on 
   category,        //Look at the example of one of the objects that we got below
   description,
-  id,
+  _id,
   image,
   title,
   price,
@@ -18,9 +20,11 @@ function Product({ //After we fetched the products, we destructure, to get the k
     <div className="product"> 
       <img src={image} className="product-image" alt="product-img"/>
       <span>{category}</span>
+      <Link to={`/products/${_id}`}>
       <h3>{title}</h3>
+      </Link>
       <p>{description}</p>
-      <button onClick={() => addToCart(id)}>Add to cart ${price}</button>{/*When the button is clicked*/}
+      <button onClick={() => addToCart(_id)}>Add to cart ${price}</button>{/*When the button is clicked*/}
      </div>                                                                 //call the onAddToCartf function
   );                                                                        //and pass it the id of the product
 }                                                                           //so it will add the id to the cart
