@@ -7,27 +7,34 @@ const {ObjectId}= Mongo;//extracting objectId function from momgodb, the functio
 
 const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export  function getUsers() {
-    return getUsersCollection().find({}).toArray();
+    return getUsersCollection()
+     .find({}).toArray();
+
 }
 
-export  function getUser(userId){
-    return  getUsersCollection()
+export async function getUser(userId){
+   const user = await getUsersCollection()
     .findOne({_id: ObjectId(userId)});//findOne- is a mongoDB method. finds the user  that its _id  is the same as the id we pased in the function
-                                  //the _id is what mongo gives each object, it includes letters and numbers so we can't parseit
-}                                 //we use the ObjectId function to turn it to a mongo ObjectId object
+                                    //the _id is what mongo gives each object, it includes letters and numbers so we can't parseit
+                                    //we use the ObjectId function to turn it to a mongo ObjectId object
+    delete user.password;   //when i get the user, delete the password field frpom what i return                             
+    return user                                  ;
+}
 
 export async function addUser(user){
 
     if(!user.name) throw new Error("Missing user name");//What happns if there is no username 
     if(!user.id) throw new Error("Missing user id");//What happns if there is no id 
-    if(!user.age) throw new Error("Missing user age");//What happns if there is no age 
+    if(!user.password) throw new Error("Missing user password");//What happns if there is no password 
     if(!user.email) throw new Error("Missing user email");//What happns if there is no age 
     if(!emailRegEx.test(user.email)) throw new Error("Not valid email")//test()- is RegExs method that checks if emailRegEx is true
+
+    const {name,id, email, password} = user;
 
     
     const {insertedId} = await getUsersCollection()//insertedId- we get it as a response from mongoDB, it'd the _id string of the new object created
 
-    .insertOne(user);//insertOne- is a mongoDB method
+    .insertOne({name, email, age, id, password});//insertOne- is a mongoDB method
     return getUser(insertedId);
 }
 
