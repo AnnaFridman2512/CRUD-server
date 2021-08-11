@@ -6,7 +6,7 @@ import { addUser } from './users.service.mjs';
 import {getUsers} from './users.service.mjs';
 import {getUser} from './users.service.mjs';
 import {getProductsByUserId} from './products.service.mjs';
-import {getPostByUserId} from './posts.service.mjs';
+
 
 export const usersRouter = express.Router();
 
@@ -37,10 +37,7 @@ usersRouter.get("/:userId/products",async (req, res) => {
     res.send(await getProductsByUserId(req.params.userId));
 });
 
-//get all posts with a spesific userId
-usersRouter.get("/:userId/posts",async (req, res) => {
-    res.send(await getPostByUserId(req.params.userId));
-});
+
 
 //Update single user 
 usersRouter.put("/:userId",async (req, res) => {//If we want to update a product we use put instead of get. we use :id to save whatever is writen after products/ and saves it in id variable (can call "id" whatever instead)

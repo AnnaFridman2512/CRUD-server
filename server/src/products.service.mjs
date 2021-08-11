@@ -4,7 +4,7 @@ import Mongo from 'mongodb';
 import { getUser } from './users.service.mjs';
 const {ObjectId}= Mongo;//extracting objectId function from momgodb, the function strigifys whatever is in objectId value
 
-export let products = loadJson.sync('./data/products.json'); //Saving the data  from the wanted file to a variable 
+//export let products = loadJson.sync('./data/products.json'); //Saving the data  from the wanted file to a variable 
 
 export function getProducts(filter = {}) {//As default we send an empty object to data base to filter by (so it will get all products)
      
@@ -44,22 +44,25 @@ export async function getProduct(id){
 } 
 
 export async function addProduct(product){
-    return getProductsCollection()
-    .insertOne(product)//insertOne- is a mongoDB method
-    .toArray();
+    const {insertedId} = await getProductsCollection()//insertedId- we get it as a response from mongoDB, it'd the _id string of the new object created
+    .insertOne(product);//insertOne- is a mongoDB method
+    return getProduct(insertedId);
 }    
 
-export function deleteProduct(id){
-    return getProductsCollection()
+export async function deleteProduct(id){
+    await getProductsCollection()
     .deleteOne({_id: ObjectId(id)})//deleteOne- is a mongoDB method,delete the object that has the same id as we passed in the argument
+
+    return "OK";
 }
 
-export function editProduct(id, newProduct){
-    return getProductsCollection()
+export async function editProduct(id, newProduct){
+    await getProductsCollection()
     .updateOne(//updateOne - is a mongoDB method
         {_id: ObjectId(id)},//first argument tells which product to update (by its id)
         {$set: newProduct}//$set - is mongoDB operator. Will add a new field with the specified value we passed in "newProduct"
     )                     //$set - tells mongo to add the key-value pair if it doesn't  exist, or to change it if it does.
+    return getProduct(id);
 }
 
 export function getProductsByUserId(userId){

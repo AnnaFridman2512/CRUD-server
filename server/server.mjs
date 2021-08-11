@@ -8,7 +8,7 @@ import express from 'express';
 import {productsRouter} from './src/products.routes.mjs';
 import {usersRouter} from './src/users.routes.mjs';
 import {categoriesRouter} from './src/categories.routes.mjs';
-import {postsRouter} from './src/posts.routes.mjs';
+
 
 import './src/db/connect.mjs';//connecting to mongodb
 
@@ -24,7 +24,7 @@ app.use(express.json());//Used to parse JSON bodies
 app.use('/api/products', productsRouter); //productsRouter is executed only when the rout is '/products'
 app.use('/api/users', usersRouter);//usersRouter is executed only when the rout is '/users'
 app.use('/api/categories', categoriesRouter);//categoriesRouter is executed only when the rout is '/categories'
-app.use('/api/posts', postsRouter);
+
 app.use(express.static('../react-app/build'));
 
 //CRUD - create read apdate delete

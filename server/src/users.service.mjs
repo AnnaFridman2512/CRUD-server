@@ -1,6 +1,7 @@
 import loadJson from 'load-json-file';
 import {getUsersCollection} from './db/connect.mjs';
 import Mongo from 'mongodb';
+import { getProduct } from './products.service.mjs';
 const {ObjectId}= Mongo;//extracting objectId function from momgodb, the function strigifys whatever is in objectId value
 //let users = loadJson.sync('./data/users.json'); //Saving the data  from the wanted file to a variable 
 
@@ -16,21 +17,24 @@ export  function getUser(userId){
 }                                 //we use the ObjectId function to turn it to a mongo ObjectId object
 
 export async function addUser(user){
-    return getUsersCollection()
-    .insertOne(user)//insertOne- is a mongoDB method
-    .toArray();
+    const {insertedId} = await getUsersCollection()//insertedId- we get it as a response from mongoDB, it'd the _id string of the new object created
+    .insertOne(user);//insertOne- is a mongoDB method
+    return getUser(insertedId);
 }
 
-export function deleteUser(id){
-    return getUsersCollection()
+export async function deleteUser(id){
+    await getUsersCollection()
     .deleteOne({_id: ObjectId(id)})//deleteOne- is a mongoDB method,delete the object that has the same userId as we passed in the argument
+
+    return "OK";
 }
 
-export function editUser(id, newUser){
-    return getUsersCollection()
+export async function editUser(Userid, newUser){
+    await getUsersCollection()
     .updateOne(//updateOne - is a mongoDB method
-        {_id: ObjectId(id)},//first argument tells which user to update (by its _id)
+        {_id: ObjectId(Userid)},//first argument tells which user to update (by its _id)
         {$set: newUser}//$set - is mongoDB operator. Will add a new field with the specified value we passed in "newUser"
     )                   //$set - tells mongo to add the key-value pair if it doesn't  exist, or to change it if it does.
+    return getUser(Userid);
 }
 
