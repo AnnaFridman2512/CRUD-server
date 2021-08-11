@@ -18,8 +18,8 @@ export default function Categories(){
             <div className="categories">
                 <h3>Categories</h3>
                 <ul className="categories-list">
-                    {categories.map(category => 
-                    <Category>
+                    {categories.map((category, index) => 
+                    <Category key={index}>
                        <span className="custon-category"> {category}</span> {/*After fetching the 'categories' array we map it and put it in the DOM, category is the child of Category */}
                     </Category>                                             //So if i want to style it i can wrap it with span and style ir in css
                                                                              //And then we can add diffrent content to the Category square, the square will look the same but the content will change

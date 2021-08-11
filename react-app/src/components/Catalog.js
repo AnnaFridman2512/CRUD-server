@@ -5,19 +5,22 @@ import { useContext, useRef} from 'react';
 export default function Catalog(){
     const {products} = useContext(CatalogContext);//we have the products in CatalogContext from fetching
     const {setProducts} = useContext(CatalogContext);
+    const idRef = useRef();
     const titleRef = useRef();
     const priceRef = useRef();
     const descriptionRef = useRef();
     const imageURLRef = useRef();
 
+
     const onAddNewProduct = () => {//Adding new product object to "products" (soon will learn data base and then will change it)
         const data = {
+            id: idRef.current.value,
             title: titleRef.current.value,
             price: priceRef.current.value, 
             description: descriptionRef.current.value, 
             image: imageURLRef.current.value,       
         };
-       fetch('/api/products', {//Adding "POST" method to fetch,to "products" rout to add the product object ("data") we creates trough input
+       fetch('api/products', {//Adding "POST" method to fetch,to "products" rout to add the product object ("data") he creates through input
             method: 'POST',
             headers: {//adding "headers" cuz we pass JSON object so "fetch" will know to pars it, here we tell fetch what mime type we pass (text,img,font etc...)
                 'Content-Type': 'application/json',
@@ -32,6 +35,7 @@ export default function Catalog(){
     return (
         <>
         <div className="add-product-form">
+            <input ref={idRef} id="product-id" placeholder="Id"/>
             <input ref={titleRef} id="product-title" placeholder="Title"/>
             <input ref={priceRef} id="product-price" placeholder="Price"/>
             <input ref={descriptionRef} id="product-description" placeholder="Description"/>
@@ -40,7 +44,7 @@ export default function Catalog(){
         </div>
         <div className="products">
         {products.length > 0 //if 'products' array is not empty (before the fetch funstion filled it)
-        ? products.map(product => <Product key={product._id} {...product} />)  //...product - pass all elements of iterableObj as arguments to function
+        ? products.map(product => <Product key={product.id} {...product} />)  //...product - pass all elements of iterableObj as arguments to function
                                                                                           //key -> some value that is uniqe fo each product, in this case its the id
                                                                                           //onAddToCart is the function that adds to cart on click
         :"Loading..."} {/*Before the fetch funstion filled the 'products' array-"Loading" is going to be printed.*/}
