@@ -1,17 +1,28 @@
 import mongoose from "mongoose";
 
 const usersSchema = new mongoose.Schema({
-       username: String,
+       username: {
+         type:String,
+         maxLength: 10
+        },
        age: Number,
        userId: String,
        email: {
          type: String,
-         required: true //
+         match:/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+         //match- is email validation with REGEXP
+         required: true 
        },
        phone: String,
        password: {
         type: String,
-        required: true //
+        required: true ,
+        minLength: 6,
+        select: false//password is not gonna be shown when get user/s
+      },
+      signUpDate:{//Is going to be added outomaticaly cuz "default" added
+        type: Date,
+        default: () => Date.now()
       }
 });
 

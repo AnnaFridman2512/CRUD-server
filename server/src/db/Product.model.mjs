@@ -6,10 +6,16 @@ const productsSchema = new mongoose.Schema({
          title: String,
          price: {
            type: Number,
+           min: 0,
+           //set: v => Math.floor(v),//When price is passed Math.floor it when saving to db
            required: true
          },
          description: String,
-         category: String,
+         category: {
+           type: String,
+           enum: ["electronics", "jewelery","men's clothing", "women's clothing" ]
+           //enum defines what category i can enter
+         },
          image: String
 });
 

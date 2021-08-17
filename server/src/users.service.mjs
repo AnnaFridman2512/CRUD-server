@@ -1,4 +1,4 @@
-//import 'express-async-errors'; //logging errors instead of "try/carch"
+
 import  {User}  from './db/User.model.mjs';
 //import {Product} from './db/Product.model'
 import Mongo from 'mongodb';

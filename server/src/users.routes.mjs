@@ -1,5 +1,5 @@
 import express from 'express';
-//import 'express-async-errors'; //logging errors instead of "try/carch"
+import 'express-async-errors'; //logging errors instead of "try/catch"
 
 import { deleteUser } from './users.service.mjs';
 import { editUser } from './users.service.mjs';
