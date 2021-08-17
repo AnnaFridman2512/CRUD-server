@@ -11,19 +11,16 @@ export const productsRouter = express.Router();
 
 //Get all products
 productsRouter.get("/" , async (req, res) => {//No need to ""/products",  (req, res)", only "/", (req, res). because "/products" is defined in server.mjs app.use('/products', productsRouter);
-    try{
-        res.send(await getProducts(req.query));// getProducts is a function from products.service.mjs
+       const products = await getProducts(req.query);
+       console.log('get products', products)
+    res.send(products);// getProducts is a function from products.service.mjs
                                                 //req.query- because the function also filters by "title" "maxPrice" "minPrice"
-    }catch(e){
-        res.status(400);
-        res.send(e.message);
-    }
 });
 
 //Create product 
 productsRouter.post("/", async (req, res) => {//If we want to create a new product we use post instead of get
                                   //No need to ""/products",  (req, res)", only "/", (req, res). because "/products" is defined in server.mjs app.use('/products', productsRouter);
-
+    try{
     res.send(await addProduct(req.body));//"addProduct" is a Function from products.service.mjs  
                             //express doesn't know how to deal with adding objects so we use "body" that came with express
                             //it parses the object
@@ -33,6 +30,10 @@ productsRouter.post("/", async (req, res) => {//If we want to create a new produ
                              //description: req.query.description,
                              //category: req.query.category,
                              //Image: req.query.Image}
+    }catch(e){
+        res.status(400);
+        res.send(e.message);   
+    }
 });
 
 //Get single product from the products array 

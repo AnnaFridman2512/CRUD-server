@@ -1,3 +1,5 @@
+
+  
 import Product from './Product';
 import {CatalogContext}  from './CatalogContext';
 import { useContext, useRef} from 'react';
@@ -43,7 +45,7 @@ export default function Catalog(){
             <button onClick={onAddNewProduct}>Add new product</button>
         </div>
         <div className="products">
-        {products.length > 0 //if 'products' array is not empty (before the fetch funstion filled it)
+        {products.length > 0 //if 'products' array is not empty (after fetch filled the array)
         ? products.map(product => <Product key={product.id} {...product} />)  //...product - pass all elements of iterableObj as arguments to function
                                                                                           //key -> some value that is uniqe fo each product, in this case its the id
                                                                                           //onAddToCart is the function that adds to cart on click

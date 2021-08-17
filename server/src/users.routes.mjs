@@ -5,7 +5,7 @@ import { editUser } from './users.service.mjs';
 import { addUser } from './users.service.mjs';
 import {getUsers} from './users.service.mjs';
 import {getUser} from './users.service.mjs';
-import {getProductsByUserId} from './products.service.mjs';
+//import {getProductsByUserId} from './products.service.mjs';
 
 
 export const usersRouter = express.Router();

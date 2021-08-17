@@ -1,22 +1,9 @@
-import Mongo from 'mongodb';
 
-const client = new Mongo.MongoClient('mongodb://localhost:27017');
+import mongoose from 'mongoose';
 
-let db;
-
-client.connect(async () => {
-     db = client.db('fakestore');
-});
-
-export function getProductsCollection(){
-    return db.collection('Products');
+export const connect = () =>{
+    mongoose.connect('mongodb://localhost:27017/fakestore', {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+        console.log('connected')
+    }).catch(err => console.log(err));
 }
 
-export function getUsersCollection(){
-    return db.collection('Users');
-}
-
-
-export function getPostsCollection(){
-    return db.collection('Posts');
-}

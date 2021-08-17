@@ -7,6 +7,7 @@
     "express": "^4.17.1",
     "load-json-file": "^6.2.0",
     "mongodb": "^4.0.1",
+    "mongoose": "^5.13.6",
     "nodemon": "^2.0.12"
   },
   "devDependencies": {},

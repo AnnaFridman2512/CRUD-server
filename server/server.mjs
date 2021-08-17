@@ -11,6 +11,8 @@ import {categoriesRouter} from './src/categories.routes.mjs';
 
 
 import './src/db/connect.mjs';//connecting to mongodb
+import { connect } from './src/db/connect.mjs';
+
 
 const app = express();
 //app.use((req, res, next) =>{
@@ -20,6 +22,10 @@ const app = express();
 //   console.log(`Request took ${time2-time} ms'` );
 //});
 
+app.use((req, res, next) => {
+    console.log('response');
+    next();
+})
 app.use(express.json());//Used to parse JSON bodies
 app.use('/api/products', productsRouter); //productsRouter is executed only when the rout is '/products'
 app.use('/api/users', usersRouter);//usersRouter is executed only when the rout is '/users'
@@ -34,6 +40,8 @@ app.use(express.static('../react-app/build'));
 
 
 
-app.listen(8080);
+app.listen(8080, () => {
+    connect();
+});
 
 console.log('Server up and running on localhost:8080');
