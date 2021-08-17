@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const usersSchema = new mongoose.Schema({
        username: {
          type:String,
-         maxLength: 10
+         maxLength: 25
         },
        age: Number,
        userId: String,
@@ -17,7 +17,16 @@ const usersSchema = new mongoose.Schema({
        password: {
         type: String,
         required: true ,
-        minLength: 6,
+        validate: {
+          validator:v => {
+          if(v.length > 6) return false;//if password shorter than 6 digits
+          if(!/[A-Z]/.test(v)) return false;//if password has no big letters
+          if(!/[\*\?\-\+\_\!]/.test(v)) return false;//if password has no special signs
+
+          return true;
+        },
+        message: prop => `${prop.value} is an invalid password`
+      },
         select: false//password is not gonna be shown when get user/s
       },
       signUpDate:{//Is going to be added outomaticaly cuz "default" added
