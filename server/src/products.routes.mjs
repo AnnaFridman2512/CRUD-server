@@ -1,5 +1,5 @@
 import express from 'express';
-
+import 'express-async-errors'; //logging errors instead of "try/catch"
 import { deleteProduct } from './products.service.mjs';
 import { editProduct } from './products.service.mjs';
 import { addProduct } from './products.service.mjs';
@@ -20,7 +20,6 @@ productsRouter.get("/" , async (req, res) => {//No need to ""/products",  (req, 
 //Create product 
 productsRouter.post("/", async (req, res) => {//If we want to create a new product we use post instead of get
                                   //No need to ""/products",  (req, res)", only "/", (req, res). because "/products" is defined in server.mjs app.use('/products', productsRouter);
-    try{
     res.send(await addProduct(req.body));//"addProduct" is a Function from products.service.mjs  
                             //express doesn't know how to deal with adding objects so we use "body" that came with express
                             //it parses the object
@@ -30,10 +29,8 @@ productsRouter.post("/", async (req, res) => {//If we want to create a new produ
                              //description: req.query.description,
                              //category: req.query.category,
                              //Image: req.query.Image}
-    }catch(e){
-        res.status(400);
-        res.send(e.message);   
-    }
+   
+    
 });
 
 //Get single product from the products array 

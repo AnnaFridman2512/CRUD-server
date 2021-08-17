@@ -1,12 +1,12 @@
-import loadJson from 'load-json-file';
+//import 'express-async-errors'; //logging errors instead of "try/carch"
 import  {User}  from './db/User.model.mjs';
-//import {Products} from './db/Products.model'
+//import {Product} from './db/Product.model'
 import Mongo from 'mongodb';
 const {ObkectId} = Mongo;
 
 //import { getProduct } from './products.service.mjs';
 
-//let users = loadJson.sync('./data/users.json'); //Saving the data  from the wanted file to a variable 
+
 
 export  function getUsers() {
     return User.find();
@@ -19,20 +19,6 @@ export async function getUser(userId){
 export async function addUser(user){
    const newUser = new User(user);
    return newUser.save();
-  
-    //if(!user.name) throw new Error("Missing user name");//What happns if there is no username 
-    //if(!user.id) throw new Error("Missing user id");//What happns if there is no id 
-    //if(!user.password) throw new Error("Missing user password");//What happns if there is no password 
-    //if(!user.email) throw new Error("Missing user email");//What happns if there is no age 
-    //if(!emailRegEx.test(user.email)) throw new Error("Not valid email")//test()- is RegExs method that checks if emailRegEx is true
-
-    //const {name,id, email, password} = user;
-
-    
-    //const {insertedId} = await getUsersCollection()//insertedId- we get it as a response from mongoDB, it'd the _id string of the new object created
-
-    //.insertOne({name, email, age, id, password});//insertOne- is a mongoDB method
-    //return getUser(insertedId);
 }
 
 export async function deleteUser(userId){

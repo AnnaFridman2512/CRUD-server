@@ -8,13 +8,13 @@ import express from 'express';
 import {productsRouter} from './src/products.routes.mjs';
 import {usersRouter} from './src/users.routes.mjs';
 import {categoriesRouter} from './src/categories.routes.mjs';
-
+import 'express-async-errors'; //logging errors instead of "try/carch"
 
 import './src/db/connect.mjs';//connecting to mongodb
 import { connect } from './src/db/connect.mjs';
 
 
-const app = express();
+export const app = express();
 //app.use((req, res, next) =>{
 //   const time = Date.now();
 //    next();
